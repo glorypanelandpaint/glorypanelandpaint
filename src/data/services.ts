@@ -72,8 +72,8 @@ export const serviceDetails: ServiceDetail[] = [
 		title: 'Panel Beating in Christchurch',
 		description:
 			'Dents, creases and accident damage repaired back to factory lines by experienced panel beaters. We restore strength and shape, not just appearance.',
-		image: '/images/glory-workshop-aston.webp',
-		imageAlt: 'Aston Martin DBX at the GLORY Panel & Paint workshop bay, Christchurch',
+		image: '/images/glory-forecourt-ferrari-urus.webp',
+		imageAlt: 'Ferrari and Lamborghini Urus outside the GLORY Panel & Paint workshop, Christchurch',
 		ctaLabel: 'Get a free quote',
 		ctaHref: '/contact/',
 	},
@@ -105,8 +105,8 @@ export const serviceDetails: ServiceDetail[] = [
 		title: 'Private & Car Dealer Work',
 		description:
 			'Repairs and pre-sale presentation work for private owners and motor dealers — quality finishes on time, at a fair price.',
-		image: '/images/glory-lamborghini.webp',
-		imageAlt: 'Lamborghini Gallardo at GLORY Panel & Paint, Christchurch',
+		image: '/images/glory-forecourt-lamborghini-sign.webp',
+		imageAlt: 'White Lamborghini Gallardo and Porsche outside the GLORY Panel & Paint sign, Christchurch',
 		ctaLabel: 'Get a free quote',
 		ctaHref: '/contact/',
 	},
@@ -116,8 +116,8 @@ export const serviceDetails: ServiceDetail[] = [
 		title: 'Fleet Services',
 		description:
 			'Fast, dependable repairs and refinishing to keep your business vehicles on the road and looking sharp. Flexible scheduling for fleet operators.',
-		image: '/images/glory-shop-bmw-m.webp',
-		imageAlt: 'BMW M at GLORY Panel & Paint, Hornby Christchurch',
+		image: '/images/glory-hero-forecourt-mobile.webp',
+		imageAlt: 'Jaguar F-Type outside the GLORY Panel & Paint workshop, Hornby Christchurch',
 		ctaLabel: 'Talk to us',
 		ctaHref: '/contact/',
 	},

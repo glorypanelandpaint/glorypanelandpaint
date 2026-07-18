@@ -5,12 +5,10 @@ export const images = {
   logo: img('1.png'),
   heroForecourt: img('glory-hero-forecourt.webp'),
   forecourtCars: img('glory-forecourt-cars.webp'),
-  workshopAston: img('glory-workshop-aston.webp'),
   astonDbx: img('glory-aston-dbx.webp'),
   ferrariTestarossa: img('glory-ferrari-testarossa.webp'),
   ferrari488: img('glory-ferrari-488.webp'),
   lamborghiniHuracan: img('glory-lamborghini-huracan.webp'),
-  lamborghini: img('glory-lamborghini.webp'),
   lamborghiniGallardo: img('glory-lamborghini-gallardo.webp'),
   mclarenMaserati: img('glory-mclaren-maserati.webp'),
   nissanGtr: img('glory-nissan-gtr.webp'),
@@ -18,7 +16,6 @@ export const images = {
   porscheMclaren: img('glory-porsche-mclaren.webp'),
   porsche911: img('glory-porsche-911.webp'),
   rangeRoverRed: img('glory-rangerover-red.webp'),
-  shopBmwM: img('glory-shop-bmw-m.webp'),
   assessment: img('assessment.jpg'),
 } as const;
 

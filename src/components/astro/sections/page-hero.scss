@@ -62,6 +62,13 @@
 	justify-content: center;
 }
 
+/* The <picture> wrapper (for the mobile art-directed source) must stay boxless,
+   otherwise it becomes the .glory-hero__photo's positioning container instead of
+   the section, since .glory-sunburst > * makes direct children position: relative. */
+.glory-hero--photo picture {
+	display: contents;
+}
+
 /* LCP image rendered as an eager, high-priority <img> instead of a CSS background.
    The parallax effect is driven by GSAP ScrollTrigger (see PageHero.astro),
    which translates the image on scroll; overflow: hidden on the section

@@ -5,6 +5,7 @@ import { business } from 'src/data/business';
 import Header from 'src/components/astro/layout/Header.astro';
 import Footer from 'src/components/astro/layout/Footer.astro';
 import PromoPopup from 'src/components/react/PromoPopup';
+import VisitReport from 'src/components/react/VisitReport';
 import PostHog from 'src/components/astro/posthog.astro';
 import '@fontsource/inter/400.css';
 import '@fontsource/inter/500.css';
@@ -107,5 +108,6 @@ const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
     </main>
     <Footer />
     <PromoPopup client:idle />
+    <VisitReport client:load transition:persist />
   </body>
 </html>

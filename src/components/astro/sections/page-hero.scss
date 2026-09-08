@@ -32,6 +32,51 @@
 	flex-wrap: wrap;
 }
 
+.glory-btns-row {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 16px 28px;
+}
+
+.glory-hero-badges {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-top: 28px;
+}
+
+.glory-badge {
+	height: 56px;
+	width: 56px;
+	flex: 0 0 auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.glory-badge img {
+	max-height: 100%;
+	max-width: 100%;
+	width: auto;
+	height: auto;
+	display: block;
+}
+
+/* The CRA mark bleeds edge-to-edge with no padding, while the MTA badge
+   has transparent padding baked in around its rounded shape — scaling
+   the CRA mark down slightly matches their apparent visual size. */
+.glory-badge--cra img {
+	max-height: 95%;
+	max-width: 95%;
+}
+
+@media (max-width: 768px) {
+	.glory-hero-badges {
+		display: none;
+	}
+}
+
 .glory-trust {
 	margin-top: 34px;
 	padding-top: 18px;

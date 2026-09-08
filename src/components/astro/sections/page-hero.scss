@@ -71,9 +71,32 @@
 	max-width: 95%;
 }
 
+.glory-eyebrow-row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+}
+
+.glory-hero-badges-mobile {
+	display: none;
+}
+
 @media (max-width: 768px) {
 	.glory-hero-badges {
 		display: none;
+	}
+
+	.glory-hero-badges-mobile {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		flex: 0 0 auto;
+	}
+
+	.glory-hero-badges-mobile .glory-badge {
+		height: 40px;
+		width: 40px;
 	}
 }
 

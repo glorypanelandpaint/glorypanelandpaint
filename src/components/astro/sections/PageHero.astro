@@ -22,7 +22,12 @@ const { eyebrow, centered = false, photo = false, padding } = Astro.props;
 >
   {photo && <HeroPhoto client:load />}
   <div class:list={["glory-inner", centered && "glory-center"]}>
-    {eyebrow && <span class="glory-eyebrow">{eyebrow}</span>}
+    {eyebrow && (
+      <div class="glory-eyebrow-row">
+        <span class="glory-eyebrow">{eyebrow}</span>
+        <slot name="eyebrow-extra" />
+      </div>
+    )}
     <slot />
   </div>
 </section>

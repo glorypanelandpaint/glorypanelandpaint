@@ -74,8 +74,17 @@
 .glory-eyebrow-row {
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
 	gap: 12px;
+	min-width: 0;
+}
+
+.glory-eyebrow-row .glory-eyebrow {
+	flex: 1 1 0%;
+	min-width: 0;
+}
+
+.glory-eyebrow-break {
+	display: none;
 }
 
 .glory-hero-badges-mobile {
@@ -92,6 +101,16 @@
 		align-items: center;
 		gap: 6px;
 		flex: 0 0 auto;
+		margin-left: auto;
+	}
+
+	.glory-eyebrow-break {
+		display: inline;
+	}
+
+	.glory-eyebrow-row--compact .glory-eyebrow {
+		font-size: 0.69rem;
+		letter-spacing: 0.03em;
 	}
 
 	.glory-hero-badges-mobile .glory-badge {

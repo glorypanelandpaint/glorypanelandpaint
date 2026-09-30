@@ -71,6 +71,11 @@
 	max-width: 95%;
 }
 
+/* The Top5.nz badge is 2:1, so it matches the others' height, not width. */
+.glory-badge--top5 {
+	width: 112px;
+}
+
 .glory-eyebrow-row {
 	display: flex;
 	align-items: center;
@@ -116,6 +121,10 @@
 	.glory-hero-badges-mobile .glory-badge {
 		height: 40px;
 		width: 40px;
+	}
+
+	.glory-hero-badges-mobile .glory-badge--top5 {
+		width: 80px;
 	}
 }
 

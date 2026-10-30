@@ -45,7 +45,7 @@ export default function HeroPhoto() {
 
 	return (
 		<picture>
-			<source media="(max-width: 768px)" srcSet="/images/glory-hero-forecourt-mobile.webp" />
+			<source media="(max-width: 768px)" srcSet="/images/glory-hero-forecourt-porsche-mobile.webp" />
 			<img
 				ref={imgRef}
 				className="glory-hero__photo"

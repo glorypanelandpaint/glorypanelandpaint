@@ -128,7 +128,10 @@
 	}
 }
 
+/* fit-content keeps the top border as wide as the trust items, not the whole
+   container; once the items wrap (mobile) it is full width as before. */
 .glory-trust {
+	width: fit-content;
 	margin-top: 34px;
 	padding-top: 18px;
 	border-top: 1px solid #2a2a30;

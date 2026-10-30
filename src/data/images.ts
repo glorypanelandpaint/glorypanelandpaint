@@ -3,7 +3,7 @@ const img = (name: string) => `/images/${name}`;
 
 export const images = {
   logo: img('1.png'),
-  heroForecourt: img('glory-hero-forecourt.webp'),
+  heroForecourt: img('glory-hero-forecourt-porsche.webp'),
   forecourtCars: img('glory-forecourt-cars.webp'),
   astonDbx: img('glory-aston-dbx.webp'),
   ferrariTestarossa: img('glory-ferrari-testarossa.webp'),

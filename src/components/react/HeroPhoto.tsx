@@ -49,7 +49,7 @@ export default function HeroPhoto() {
 			<img
 				ref={imgRef}
 				className="glory-hero__photo"
-				src="/images/glory-hero-forecourt.webp"
+				src="/images/glory-hero-forecourt-porsche.webp"
 				alt=""
 				width={1920}
 				height={1098}

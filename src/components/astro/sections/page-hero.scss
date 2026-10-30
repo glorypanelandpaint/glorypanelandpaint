@@ -238,9 +238,11 @@
 		padding: 84px 20px 52px;
 	}
 
-	/* No parallax on mobile (GSAP matchMedia skips it below 769px) */
+	/* No parallax on mobile (GSAP matchMedia skips it below 769px).
+	   42% (with the mobile photo's crop) puts the Porsche crest in the gap
+	   above the buttons on 360-440px phones; re-check it if either changes. */
 	.glory-hero .glory-hero__photo {
-		object-position: center 56%;
+		object-position: center 42%;
 	}
 
 	.glory-hero.glory-hero--photo::after {

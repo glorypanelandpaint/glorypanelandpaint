@@ -20,7 +20,7 @@ export const pageSeo: Record<string, PageSeo> = {
         focusKeyword: 'panel beaters Christchurch',
         title: 'Panel Beaters Christchurch | Glory Panel & Paint',
         description:
-			'Christchurch panel beating, spray painting & insurance repairs. 5.0★ from 300+ Google reviews. Free courtesy car, all insurers, guaranteed work. Book online.',
+			'Christchurch panel beating, spray painting & insurance repairs. 5.0★ from 330+ Google reviews. Free courtesy car, all insurers, guaranteed work. Book online.',
     },
     services: {
         path: '/services/',

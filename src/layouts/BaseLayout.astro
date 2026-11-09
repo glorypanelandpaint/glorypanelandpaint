@@ -75,7 +75,7 @@ const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
       ))
     }
 
-		<!-- Google tag (gtag.js) — loads on production only -->
+		<!-- Google Tag Manager — production only, loaded after the page has rendered -->
 		{
 		  import.meta.env.PROD && (
 		    <>
@@ -83,14 +83,33 @@ const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
 						/* eslint-disable @typescript-eslint/ban-ts-comment -- GTM third-party snippet */
 						// @ts-nocheck
 						(function(w, d, s, l, i) {
-						  w[l] = w[l] || [];
-						  w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
-						  const f = d.getElementsByTagName(s)[0];
-						  const j = d.createElement(s);
-						  const dl = l != 'dataLayer' ? '&l=' + l : '';
-						  j.async = true;
-						  j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-						  f.parentNode.insertBefore(j, f);
+						  let started = false;
+						  function loadGtm() {
+						    if (started) return;
+						    started = true;
+						    w[l] = w[l] || [];
+						    w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+						    const f = d.getElementsByTagName(s)[0];
+						    const j = d.createElement(s);
+						    const dl = l != 'dataLayer' ? '&l=' + l : '';
+						    j.async = true;
+						    j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+						    f.parentNode.insertBefore(j, f);
+						  }
+
+						  // Let the page paint first, then load GTM when the browser is idle.
+						  function loadWhenIdle() {
+						    if ('requestIdleCallback' in w) w.requestIdleCallback(loadGtm, { timeout: 1500 });
+						    else w.setTimeout(loadGtm, 500);
+						  }
+						  if (d.readyState === 'complete') loadWhenIdle();
+						  else w.addEventListener('load', loadWhenIdle, { once: true });
+
+						  // Never hold analytics back for more than 3 seconds, and load at once on interaction.
+						  w.setTimeout(loadGtm, 3000);
+						  ['pointerdown', 'keydown', 'touchstart', 'scroll'].forEach(function(type) {
+						    w.addEventListener(type, loadGtm, { once: true, passive: true });
+						  });
 						})(window, document, 'script', 'dataLayer', 'GTM-MTQG282K');
 		      </script>
 		    </>

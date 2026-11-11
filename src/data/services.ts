@@ -3,6 +3,8 @@ export type HomeService = {
 	description: string;
 	/** Raw SVG child markup (paths, rects, etc.) */
 	iconSvg: string;
+	/** Makes the whole card a link to this page. */
+	href?: string;
 };
 
 export const homeServices: HomeService[] = [

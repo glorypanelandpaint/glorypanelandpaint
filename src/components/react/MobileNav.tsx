@@ -6,19 +6,27 @@ type NavItem = {
 	active?: boolean;
 };
 
+/** The gold button at the end of the menu. */
+export type NavCta = {
+	label: string;
+	href: string;
+};
+
+export const BOOK_ONLINE: NavCta = { label: 'Book Online', href: '/book-online/' };
+
 interface Props {
 	currentPath: string;
 	navItems: NavItem[];
+	/** Replaces the Book Online button, e.g. with a link to the page's own quote form. */
+	cta?: NavCta;
 }
 
-const BOOK_ONLINE = { label: 'Book Online', href: '/book-online/' };
-
-export default function MobileNav({ currentPath, navItems }: Props) {
+export default function MobileNav({ currentPath, navItems, cta = BOOK_ONLINE }: Props) {
 	const [open, setOpen] = useState(false);
 
-	const bookOnlineActive =
-		currentPath === '/book-online/' ||
-		currentPath.startsWith('/book-appointment');
+	const ctaActive =
+		cta.href === BOOK_ONLINE.href &&
+		(currentPath === '/book-online/' || currentPath.startsWith('/book-appointment'));
 
 	useEffect(() => {
 		document.body.style.overflow = open ? 'hidden' : '';
@@ -92,11 +100,11 @@ export default function MobileNav({ currentPath, navItems }: Props) {
 					))}
 					<li className="glory-nav-cta">
 						<a
-							href={BOOK_ONLINE.href}
-							aria-current={bookOnlineActive ? 'page' : undefined}
+							href={cta.href}
+							aria-current={ctaActive ? 'page' : undefined}
 							onClick={() => setOpen(false)}
 						>
-							{BOOK_ONLINE.label}
+							{cta.label}
 						</a>
 					</li>
 				</ul>

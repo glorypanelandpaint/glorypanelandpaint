@@ -57,6 +57,20 @@
 	margin: 8px 0 0;
 }
 
+a.glory-card {
+	display: block;
+	color: inherit;
+	text-decoration: none;
+}
+
+.glory-card__more {
+	display: inline-block;
+	margin-top: 12px;
+	font-size: 0.82rem;
+	font-weight: 600;
+	color: var(--glory-gold);
+}
+
 @media (max-width: 880px) {
 	.glory-grid {
 		grid-template-columns: 1fr;

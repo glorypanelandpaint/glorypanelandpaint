@@ -1,17 +1,37 @@
 ---
-import { homeServices } from '../../../data/services';
+import { homeServices, type HomeService } from '../../../data/services';
+
+interface Props {
+	/** Cards to show. Defaults to the home page services. */
+	services?: HomeService[];
+}
+
+const { services = homeServices } = Astro.props;
 ---
 
 <div class="glory-grid">
 	{
-		homeServices.map((service) => (
-			<div class="glory-card">
-				<div class="glory-disc">
-					<svg viewBox="0 0 24 24" aria-hidden="true" set:html={service.iconSvg} />
+		services.map((service) =>
+			service.href ? (
+				<a class="glory-card glory-card--link" href={service.href}>
+					<div class="glory-disc">
+						<svg viewBox="0 0 24 24" aria-hidden="true" set:html={service.iconSvg} />
+					</div>
+					<h3>{service.title}</h3>
+					<p>{service.description}</p>
+					<span class="glory-card__more">
+						Learn more <span aria-hidden="true">&rarr;</span>
+					</span>
+				</a>
+			) : (
+				<div class="glory-card">
+					<div class="glory-disc">
+						<svg viewBox="0 0 24 24" aria-hidden="true" set:html={service.iconSvg} />
+					</div>
+					<h3>{service.title}</h3>
+					<p>{service.description}</p>
 				</div>
-				<h3>{service.title}</h3>
-				<p>{service.description}</p>
-			</div>
-		))
+			),
+		)
 	}
 </div>

@@ -5,6 +5,7 @@ import { business } from 'src/data/business';
 import Header from 'src/components/astro/layout/Header.astro';
 import Footer from 'src/components/astro/layout/Footer.astro';
 import PromoPopup from 'src/components/react/PromoPopup';
+import type { NavCta } from 'src/components/react/MobileNav';
 import VisitReport from 'src/components/react/VisitReport';
 import PostHog from 'src/components/astro/posthog.astro';
 import '@fontsource/inter/400.css';
@@ -22,9 +23,13 @@ import 'src/components/react/promo-popup.scss';
 interface Props {
   seo: PageSeo;
   schema?: Record<string, unknown> | Record<string, unknown>[];
+  /** Show the insurance promo popup. Defaults to true. */
+  showPromo?: boolean;
+  /** Replaces the header's Book Online button. */
+  headerCta?: NavCta;
 }
 
-const { seo, schema } = Astro.props;
+const { seo, schema, showPromo = true, headerCta } = Astro.props;
 const canonical = new URL(seo.path, business.url).href;
 const ogImage = new URL('/images/og-image.jpg', business.url).href;
 const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
@@ -121,12 +126,12 @@ const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
       <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MTQG282K"
         height="0" width="0" style="display:none;visibility:hidden"></iframe>
     </noscript>
-    <Header />
+    <Header cta={headerCta} />
     <main id="main-content">
       <slot />
     </main>
     <Footer />
-    <PromoPopup client:idle />
+    {showPromo && <PromoPopup client:idle />}
     <VisitReport client:load transition:persist />
   </body>
 </html>

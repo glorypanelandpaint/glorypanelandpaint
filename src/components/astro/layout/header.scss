@@ -11,6 +11,9 @@
 	font-size: 1.2rem;
 	color: #e8e8ee;
 	text-decoration: none;
+	/* Never wrap, even before the menu font has loaded; a wrapped item makes the header
+	   taller for a moment and pushes the page down (layout shift). */
+	white-space: nowrap;
 }
 
 .glory-nav a:hover {
@@ -266,10 +269,6 @@ main#main-content {
 @media (min-width: 769px) and (max-width: 1099px) {
 	.glory-header__main > .glory-site-header__inner {
 		gap: 16px;
-	}
-
-	.glory-nav a {
-		white-space: nowrap;
 	}
 
 	.glory-header__nav-list > li > a {

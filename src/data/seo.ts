@@ -29,6 +29,13 @@ export const pageSeo: Record<string, PageSeo> = {
         description:
 			'Panel beating, spray painting, smash & chassis repairs, rust and fleet work in Christchurch. Spies Hecker waterborne paint and guaranteed workmanship.',
     },
+    'trucks-campervans': {
+        path: '/trucks-campervans/',
+        focusKeyword: 'truck and campervan repairs Christchurch',
+        title: 'Truck & Campervan Repairs Christchurch | Glory Panel & Paint',
+        description:
+			'Truck, trailer, campervan & motorhome repairs in Christchurch: panel beating, resprays & fibreglass. All insurance claims. 5.0★ from 330+ Google reviews.',
+    },
     insurance: {
         path: '/insurance/',
         focusKeyword: 'insurance car repairs Christchurch',

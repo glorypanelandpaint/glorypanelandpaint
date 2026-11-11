@@ -1,0 +1,57 @@
+@import '../../components/astro/sections/service-grid.scss';
+
+/* ---- Hero: copy on the left, photo on the right ---- */
+.glory-hero.glory-lv-hero {
+	padding: 80px 24px 72px;
+}
+
+.glory-lv-hero__grid {
+	display: grid;
+	grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+	gap: 44px;
+	align-items: center;
+}
+
+.glory-lv-hero__photo {
+	display: block;
+	width: 100%;
+	height: auto;
+	aspect-ratio: 3 / 2;
+	object-fit: cover;
+	border-radius: 12px;
+	border: 1px solid var(--glory-border);
+}
+
+/* ---- Services ---- */
+.glory .glory-lv-intro {
+	max-width: 640px;
+	margin: 14px auto 0;
+	font-size: 1rem;
+}
+
+/* ---- Quote form ---- */
+.glory-lv-quote {
+	/* keep the heading clear of the sticky header after "Get a Free Quote" */
+	scroll-margin-top: 88px;
+}
+
+.glory-lv-quote__inner {
+	max-width: 680px;
+	margin: 0 auto;
+}
+
+.glory .glory-lv-quote__inner h2 {
+	font-size: 1.3rem;
+	margin: 0 0 12px;
+}
+
+@media (max-width: 880px) {
+	.glory-hero.glory-lv-hero {
+		padding: 56px 20px;
+	}
+
+	.glory-lv-hero__grid {
+		grid-template-columns: minmax(0, 1fr);
+		gap: 32px;
+	}
+}

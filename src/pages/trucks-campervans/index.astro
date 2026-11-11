@@ -1,0 +1,88 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GloryGoldText from '../../components/astro/GloryGoldText.astro';
+import HomeServiceGrid from '../../components/astro/sections/HomeServiceGrid.astro';
+import ContactForm from '../../components/astro/sections/ContactForm.astro';
+import { business } from '../../data/business';
+import { getPageSeo } from '../../data/seo';
+import {
+  largeVehicleHero,
+  largeVehicleHeroImage,
+  largeVehiclePagePath,
+  largeVehicleService,
+  largeVehicleServices,
+  largeVehicleServicesIntro,
+} from '../../data/large-vehicles';
+import { autoBodyShopSchema, breadcrumbSchema, serviceSchema } from '../../lib/schema';
+import './styles.scss';
+
+const seo = getPageSeo('trucks-campervans');
+
+const schema = [
+  autoBodyShopSchema(),
+  serviceSchema(largeVehicleService),
+  breadcrumbSchema([
+    { name: 'Home', path: '/' },
+    { name: 'Trucks & Campervans', path: largeVehiclePagePath },
+  ]),
+];
+---
+
+<BaseLayout
+  seo={seo}
+  schema={schema}
+  showPromo={false}
+  headerCta={{ label: 'Get a Quote', href: '#quote' }}
+>
+  <div class="glory">
+    <section class="glory-section glory-hero glory-sunburst glory-lv-hero">
+      <div class="glory-inner glory-lv-hero__grid">
+        <div>
+          <span class="glory-eyebrow">{largeVehicleHero.eyebrow}</span>
+          <h1>Truck &amp; Campervan Repairs in <GloryGoldText text="Christchurch" /></h1>
+          <p class="glory-sub">{largeVehicleHero.subtitle}</p>
+          <div class="glory-btns">
+            <a class="glory-btn-gold" href="#quote">Get a Free Quote &rarr;</a>
+            <a class="glory-btn-outline" href={`tel:${business.phoneTel}`}>Call {business.phone}</a>
+          </div>
+          <div class="glory-trust">
+            <span><b>5.0</b> from 330+ Google reviews</span>
+            <span><b>CRA</b> &amp; <b>MTA</b> members</span>
+            <span><b>All</b> insurance claims</span>
+          </div>
+        </div>
+        <img
+          class="glory-lv-hero__photo"
+          src={largeVehicleHeroImage.src}
+          srcset={largeVehicleHeroImage.srcSet}
+          sizes="(max-width: 880px) calc(100vw - 40px), (max-width: 1168px) calc((100vw - 92px) * 0.45), 484px"
+          width={largeVehicleHeroImage.width}
+          height={largeVehicleHeroImage.height}
+          alt={largeVehicleHeroImage.alt}
+          fetchpriority="high"
+          decoding="async"
+        />
+      </div>
+    </section>
+
+    <section class="glory-section glory-bg-layer">
+      <div class="glory-inner">
+        <div class="glory-head">
+          <span class="glory-eyebrow">Our services</span>
+          <h2>Big vehicles, same Glory finish</h2>
+          <p class="glory-lv-intro">{largeVehicleServicesIntro}</p>
+        </div>
+        <HomeServiceGrid services={largeVehicleServices} />
+      </div>
+    </section>
+
+    <section class="glory-section glory-bg-black glory-lv-quote" id="quote">
+      <div class="glory-inner">
+        <div class="glory-lv-quote__inner">
+          <h2>Request a free quote</h2>
+          <ContactForm variant="large-vehicle" />
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

@@ -5,6 +5,12 @@ import './footer.scss';
 
 const year = new Date().getFullYear();
 
+const serviceLinks = [
+	{ label: 'Panel Beating & Spray Painting', href: '/services/' },
+	{ label: 'Truck & Campervan Repairs', href: '/trucks-campervans/' },
+	{ label: 'Insurance Claims', href: '/insurance/' },
+];
+
 const tagline =
 	'GLORY Panel & Paint is a leading provider of quality panel beating and paint services — from minor repairs to major panel and paint restorations. We strive for perfection and guarantee work that\u2019s high-quality, trustworthy and reliable, so you have peace of mind your vehicle is in the best hands.';
 ---
@@ -86,6 +92,10 @@ const tagline =
 				</ul>
 			</div>
 		</div>
+
+		<nav class="glory-foot-links" aria-label="Our services">
+			{serviceLinks.map((link) => <a href={link.href}>{link.label}</a>)}
+		</nav>
 
 		<div class="glory-foot-bottom">
 			&copy; {year} {business.name}, Hornby, Christchurch NZ. All rights reserved.

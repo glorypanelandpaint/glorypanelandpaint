@@ -62,7 +62,7 @@ export const pageSeo: Record<string, PageSeo> = {
         focusKeyword: 'book car assessment Christchurch',
         title: 'Book Online | Vehicle Assessment | Glory Panel & Paint',
         description:
-			'Book your free vehicle assessment online. Pick a time, tell us about your vehicle and upload damage photos. Glory Panel & Paint, Hornby, Christchurch.',
+			'Book your free vehicle assessment online. Pick a time that suits you and tell us about your vehicle. Glory Panel & Paint, Hornby, Christchurch.',
     },
     'book-appointment': {
         path: '/book-appointment/',

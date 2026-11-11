@@ -259,3 +259,57 @@ main#main-content {
 		transform: translateX(6px);
 	}
 }
+
+/* ---- Desktop menu between the phone menu (≤768px) and full width ----
+   Seven items only fit on one line above ~1100px at full size, so step the
+   spacing (and below 1024px the font size) down as the window narrows. */
+@media (min-width: 769px) and (max-width: 1099px) {
+	.glory-header__main > .glory-site-header__inner {
+		gap: 16px;
+	}
+
+	.glory-nav a {
+		white-space: nowrap;
+	}
+
+	.glory-header__nav-list > li > a {
+		padding: 10px 12px;
+	}
+
+	.glory-header__nav-list > li.glory-nav-cta {
+		margin-left: 8px;
+	}
+
+	.glory-header__nav-list > li.glory-nav-cta > a {
+		padding: 9px 14px;
+	}
+}
+
+@media (min-width: 769px) and (max-width: 1023px) {
+	.glory-nav a {
+		font-size: 1.05rem;
+	}
+
+	.glory-header__nav-list > li > a {
+		padding: 10px 9px;
+	}
+}
+
+@media (min-width: 769px) and (max-width: 899px) {
+	.glory-nav a {
+		font-size: 0.9rem;
+		letter-spacing: 0.02em;
+	}
+
+	.glory-header__nav-list > li > a {
+		padding: 10px 7px;
+	}
+
+	.glory-header__nav-list > li.glory-nav-cta {
+		margin-left: 6px;
+	}
+
+	.glory-header__nav-list > li.glory-nav-cta > a {
+		padding: 8px 10px;
+	}
+}

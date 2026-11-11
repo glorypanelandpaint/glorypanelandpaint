@@ -9,4 +9,6 @@ interface Window {
     [key: string]: unknown;
   };
   __posthog_initialized?: boolean;
+  /** Google Tag Manager queue */
+  dataLayer?: Record<string, unknown>[];
 }

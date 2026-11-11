@@ -9,6 +9,7 @@ import {
   largeVehicleHero,
   largeVehicleHeroImage,
   largeVehiclePagePath,
+  largeVehicleQuote,
   largeVehicleService,
   largeVehicleServices,
   largeVehicleServicesIntro,
@@ -79,7 +80,15 @@ const schema = [
     <section class="glory-section glory-bg-black glory-lv-quote" id="quote">
       <div class="glory-inner">
         <div class="glory-lv-quote__inner">
-          <h2>Request a free quote</h2>
+          <h2>{largeVehicleQuote.heading}</h2>
+          <p class="glory-quote-note">
+            {largeVehicleQuote.vehicles}
+            <br />
+            {largeVehicleQuote.carPrompt}{' '}
+            <a href={largeVehicleQuote.carLinkHref}>
+              {largeVehicleQuote.carLinkLabel}{' '}<span aria-hidden="true">&rarr;</span>
+            </a>
+          </p>
           <ContactForm variant="large-vehicle" />
         </div>
       </div>

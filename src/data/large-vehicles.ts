@@ -75,6 +75,15 @@ export const largeVehicleServices: HomeService[] = [
   },
 ];
 
+/** Quote form heading, with a way out for car owners who landed here. */
+export const largeVehicleQuote = {
+  heading: 'Request a free truck & campervan quote',
+  vehicles: 'For trucks, trailers, campervans, motorhomes, caravans and fleets.',
+  carPrompt: 'Car, SUV or ute?',
+  carLinkLabel: 'Use our car quote form instead',
+  carLinkHref: '/contact/',
+} as const;
+
 /** Structured data for the page (Service). */
 export const largeVehicleService = {
   name: 'Truck & Campervan Repairs',

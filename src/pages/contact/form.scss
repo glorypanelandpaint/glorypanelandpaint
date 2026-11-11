@@ -201,6 +201,23 @@
 	margin-top: 12px;
 }
 
+/* Under the quote form heading: points car and truck & campervan customers to their form */
+.glory-quote-note {
+	margin: 6px 0 16px;
+	font-size: 0.9rem;
+	line-height: 1.6;
+}
+
+.glory-quote-note a {
+	color: var(--glory-gold);
+	font-weight: 600;
+	text-decoration: none;
+}
+
+.glory-quote-note a:hover {
+	text-decoration: underline;
+}
+
 .glory-form__fallback a {
 	color: var(--glory-gold);
 	text-decoration: none;

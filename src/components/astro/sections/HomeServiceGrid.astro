@@ -7,13 +7,19 @@ interface Props {
 }
 
 const { services = homeServices } = Astro.props;
+
+/** "glory-card" plus its modifiers; a card without href or onlyOn stays class="glory-card". */
+const cardClass = (service: HomeService) =>
+	['glory-card', service.href && 'glory-card--link', service.onlyOn && `glory-card--${service.onlyOn}-only`]
+		.filter(Boolean)
+		.join(' ');
 ---
 
 <div class="glory-grid">
 	{
 		services.map((service) =>
 			service.href ? (
-				<a class="glory-card glory-card--link" href={service.href}>
+				<a class={cardClass(service)} href={service.href}>
 					<div class="glory-disc">
 						<svg viewBox="0 0 24 24" aria-hidden="true" set:html={service.iconSvg} />
 					</div>
@@ -24,7 +30,7 @@ const { services = homeServices } = Astro.props;
 					</span>
 				</a>
 			) : (
-				<div class="glory-card">
+				<div class={cardClass(service)}>
 					<div class="glory-disc">
 						<svg viewBox="0 0 24 24" aria-hidden="true" set:html={service.iconSvg} />
 					</div>

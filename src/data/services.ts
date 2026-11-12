@@ -5,6 +5,8 @@ export type HomeService = {
 	iconSvg: string;
 	/** Makes the whole card a link to this page. */
 	href?: string;
+	/** Show the card only on phones (≤768px) or only on tablets and desktops. Omit to show it everywhere. */
+	onlyOn?: 'phone' | 'tablet-desktop';
 };
 
 export const homeServices: HomeService[] = [

@@ -76,3 +76,16 @@ a.glory-card {
 		grid-template-columns: 1fr;
 	}
 }
+
+/* Cards marked onlyOn (HomeService): phones are ≤768px, where the site switches to the phone menu */
+@media (min-width: 769px) {
+	.glory-grid > .glory-card--phone-only {
+		display: none;
+	}
+}
+
+@media (max-width: 768px) {
+	.glory-grid > .glory-card--tablet-desktop-only {
+		display: none;
+	}
+}

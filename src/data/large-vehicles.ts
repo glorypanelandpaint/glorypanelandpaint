@@ -31,21 +31,37 @@ export const largeVehicleHero = {
 export const largeVehicleServicesIntro =
   'From a single cab respray to a whole fleet, our Hornby team repairs and refinishes trucks, trailers, campervans, motorhomes and caravans to the same standard as our cars.';
 
-/** Display only for now; each card gets a link once it has its own page. */
+const sprayCanIcon =
+  '<rect x="8" y="8" width="8" height="13" rx="2"/><path d="M10 8V6a2 2 0 0 1 4 0v2"/><path d="M18 5h.01"/><path d="M20 7h.01"/><path d="M18 9h.01"/>';
+const hammerIcon =
+  '<path d="m15 12-8.5 8.5a2.12 2.12 0 1 1-3-3L12 9"/><path d="M17.64 15 22 10.64"/><path d="m20.91 11.7-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 0 0-3.94-1.64H9l.92.82A6.18 6.18 0 0 1 12 8.4v1.56l2 2h.86c.85 0 1.65.33 2.25.93l1.25 1.25"/>';
+
+/**
+ * Display only for now; each card gets a link once it has its own page.
+ * Phones (≤768px) get one shorter truck card instead of two, so there is less to scroll;
+ * tablets and desktops keep both truck cards.
+ */
 export const largeVehicleServices: HomeService[] = [
+  {
+    title: 'Truck Repairs & Painting',
+    description:
+      'Dents, scrapes and accident damage repaired, plus full or cab resprays colour-matched to your truck or fleet.',
+    iconSvg: hammerIcon,
+    onlyOn: 'phone',
+  },
   {
     title: 'Truck Spray Painting',
     description:
       'Full resprays, cab resprays, colour changes and touch-ups. We colour-match to your original paint or fleet scheme for a clean, even finish that stands up to life on the road.',
-    iconSvg:
-      '<rect x="8" y="8" width="8" height="13" rx="2"/><path d="M10 8V6a2 2 0 0 1 4 0v2"/><path d="M18 5h.01"/><path d="M20 7h.01"/><path d="M18 9h.01"/>',
+    iconSvg: sprayCanIcon,
+    onlyOn: 'tablet-desktop',
   },
   {
     title: 'Truck Panel Repairs',
     description:
       'Dents, scrapes and accident damage repaired and refinished. We repair or replace damaged panels and blend the paint, so your truck looks right and gets back to work.',
-    iconSvg:
-      '<path d="m15 12-8.5 8.5a2.12 2.12 0 1 1-3-3L12 9"/><path d="M17.64 15 22 10.64"/><path d="m20.91 11.7-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 0 0-3.94-1.64H9l.92.82A6.18 6.18 0 0 1 12 8.4v1.56l2 2h.86c.85 0 1.65.33 2.25.93l1.25 1.25"/>',
+    iconSvg: hammerIcon,
+    onlyOn: 'tablet-desktop',
   },
   {
     title: 'Trailer Repairs & Painting',

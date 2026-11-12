@@ -9,10 +9,24 @@ import './styles.scss';
 
 const seo = getPageSeo('about');
 
+// The tiles have a 280px minimum height, so narrow ones (screens 881-1100px wide, phones under ~375px)
+// trim the photos at the sides. Both Porsches sit on the left of their photos: keep the crop anchored
+// left so the car and its GLORY plate stay in view.
 const showcaseImages = [
-	{ src: images.astonDbx, alt: 'Black Aston Martin DBX outside GLORY Panel & Paint, Hornby Christchurch' },
-	{ src: images.bentleyBlue, alt: 'Blue Bentley Continental convertible at GLORY Panel & Paint, Christchurch' },
-	{ src: images.ferrariCalifornia, alt: 'Red Ferrari California outside the GLORY Panel & Paint workshop in Hornby' },
+	{
+		src: images.porsche911Grey,
+		alt: 'Grey Porsche 911 outside the GLORY Panel & Paint workshop in Hornby, Christchurch',
+		position: 'left center',
+	},
+	{
+		src: images.ferrariUrusWide,
+		alt: 'Red Ferrari California and Lamborghini Urus outside the GLORY Panel & Paint workshop in Hornby, Christchurch',
+	},
+	{
+		src: images.porsche911Yellow,
+		alt: 'Yellow Porsche 911 outside the GLORY Panel & Paint workshop in Hornby, Christchurch',
+		position: 'left center',
+	},
 ];
 ---
 
@@ -85,7 +99,14 @@ const showcaseImages = [
 					{
 						showcaseImages.map((img) => (
 							<div class="glory-photo">
-								<img src={img.src} alt={img.alt} loading="lazy" width="360" height="270" />
+								<img
+									src={img.src}
+									alt={img.alt}
+									loading="lazy"
+									width="360"
+									height="270"
+									style={img.position ? `object-position: ${img.position};` : undefined}
+								/>
 							</div>
 						))
 					}

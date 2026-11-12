@@ -22,6 +22,11 @@
 	border: 1px solid var(--glory-border);
 }
 
+/* Trust line: when it wraps (phones), rows sit at half the 24px space between items */
+.glory-lv-hero .glory-trust {
+	row-gap: 12px;
+}
+
 /* ---- Services ---- */
 .glory .glory-lv-intro {
 	max-width: 640px;

@@ -99,8 +99,8 @@ export const serviceDetails: ServiceDetail[] = [
 		title: 'Smash & Chassis Repairs',
 		description:
 			'Major collision and structural damage straightened on computerised measuring jigs to manufacturer specifications — so your car is safe as well as straight.',
-		image: '/images/glory-porsche-911.webp',
-		imageAlt: 'Porsche 911 Turbo at GLORY Panel & Paint, Christchurch',
+		image: '/images/glory-forecourt-porsche-911-yellow.webp',
+		imageAlt: 'Yellow Porsche 911 outside the GLORY Panel & Paint workshop, Christchurch',
 		ctaLabel: 'Book an assessment',
 		ctaHref: '/book-online/',
 	},

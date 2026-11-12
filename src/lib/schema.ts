@@ -6,15 +6,49 @@ type FaqItem = {
 	answer: string;
 };
 
+type BreadcrumbItem = {
+	name: string;
+	path: string;
+};
+
+type ServiceSchemaInput = {
+	name: string;
+	serviceType: string;
+	description: string;
+	path: string;
+};
+
+/** Absolute URL on the live site, e.g. siteUrl('/images/og-image.jpg'). */
+function siteUrl(path: string): string {
+	return new URL(path, business.url).href;
+}
+
+const localBusinessId = `${business.url}#localbusiness`;
+
+/** Based in Christchurch, but we take work from anywhere in New Zealand. */
+const areaServed = [
+	{ '@type': 'City', name: 'Christchurch' },
+	{ '@type': 'Country', name: 'New Zealand' },
+];
+
+/** Truck, trailer, campervan and fleet services (see /trucks-campervans/). */
+const largeVehicleServices = [
+	'Truck Spray Painting',
+	'Truck Panel Repairs',
+	'Trailer Repairs & Painting',
+	'Campervan & Motorhome Repairs',
+	'Fleet Contracts',
+];
+
 export function autoBodyShopSchema() {
 	const home = business.url;
 	return {
 		'@context': 'https://schema.org',
 		'@type': 'AutoBodyShop',
-		'@id': `${home}#localbusiness`,
+		'@id': localBusinessId,
 		name: business.name,
 		url: home,
-		image: `${home}/images/og-image.jpg`,
+		image: siteUrl('/images/og-image.jpg'),
 		telephone: business.phoneTel,
 		email: business.email,
 		priceRange: '$$',
@@ -32,9 +66,14 @@ export function autoBodyShopSchema() {
 			longitude: business.geo.longitude,
 		},
 		hasMap: googleReviewsUrl,
-		areaServed: {
-			'@type': 'City',
-			name: 'Christchurch',
+		areaServed,
+		hasOfferCatalog: {
+			'@type': 'OfferCatalog',
+			name: 'Truck & Campervan Repairs',
+			itemListElement: largeVehicleServices.map((name) => ({
+				'@type': 'Offer',
+				itemOffered: { '@type': 'Service', name },
+			})),
 		},
 		sameAs: [business.social.facebook, business.social.instagram],
 		openingHoursSpecification: business.openingHoursSpecification.map((slot) => ({
@@ -42,6 +81,32 @@ export function autoBodyShopSchema() {
 			dayOfWeek: slot.dayOfWeek,
 			opens: slot.opens,
 			closes: slot.closes,
+		})),
+	};
+}
+
+export function serviceSchema({ name, serviceType, description, path }: ServiceSchemaInput) {
+	return {
+		'@context': 'https://schema.org',
+		'@type': 'Service',
+		name,
+		serviceType,
+		description,
+		url: siteUrl(path),
+		provider: { '@id': localBusinessId },
+		areaServed,
+	};
+}
+
+export function breadcrumbSchema(items: BreadcrumbItem[]) {
+	return {
+		'@context': 'https://schema.org',
+		'@type': 'BreadcrumbList',
+		itemListElement: items.map((item, index) => ({
+			'@type': 'ListItem',
+			position: index + 1,
+			name: item.name,
+			item: siteUrl(item.path),
 		})),
 	};
 }

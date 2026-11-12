@@ -75,6 +75,68 @@
 	resize: vertical;
 }
 
+/* Dropdowns (truck & campervan form): same look in every browser, gold arrow */
+.glory-form select {
+	appearance: none;
+	-webkit-appearance: none;
+	padding-right: 38px;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23c2a576' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: right 13px center;
+	background-size: 14px;
+	color-scheme: dark;
+	cursor: pointer;
+}
+
+.glory-form select.is-placeholder {
+	color: #55555f;
+}
+
+.glory-form select option,
+.glory-form select optgroup {
+	background: #0e0e12;
+	color: #fff;
+}
+
+/* Radio questions (Enquiring as, Is this an insurance claim?) */
+.glory-form .field-choice {
+	border: 0;
+	padding: 0;
+	min-inline-size: 0;
+}
+
+.glory-form .field-choice legend {
+	padding: 0;
+	margin-bottom: 8px;
+	font-size: 0.82rem;
+	color: #c5c5cc;
+	font-weight: 600;
+}
+
+.glory-form .field-choice label {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	margin-right: 24px;
+	font-size: 0.92rem;
+	font-weight: 500;
+	color: #e8e8ee;
+	cursor: pointer;
+}
+
+.glory-form .field-choice input {
+	width: 18px;
+	height: 18px;
+	margin: 0;
+	accent-color: var(--glory-gold);
+	color-scheme: dark;
+	cursor: pointer;
+}
+
+.glory-form .req {
+	color: var(--glory-gold);
+}
+
 .glory-form button[type='submit'],
 .glory-form input[type='submit'] {
 	background: var(--glory-gold-grad);
@@ -137,6 +199,23 @@
 	color: #7d7d86;
 	font-size: 0.82rem;
 	margin-top: 12px;
+}
+
+/* Under the quote form heading: points car and truck & campervan customers to their form */
+.glory-quote-note {
+	margin: 6px 0 16px;
+	font-size: 0.9rem;
+	line-height: 1.6;
+}
+
+.glory-quote-note a {
+	color: var(--glory-gold);
+	font-weight: 600;
+	text-decoration: none;
+}
+
+.glory-quote-note a:hover {
+	text-decoration: underline;
 }
 
 .glory-form__fallback a {

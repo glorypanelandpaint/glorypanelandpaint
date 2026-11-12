@@ -29,6 +29,13 @@ export const pageSeo: Record<string, PageSeo> = {
         description:
 			'Panel beating, spray painting, smash & chassis repairs, rust and fleet work in Christchurch. Spies Hecker waterborne paint and guaranteed workmanship.',
     },
+    'trucks-campervans': {
+        path: '/trucks-campervans/',
+        focusKeyword: 'truck and campervan repairs Christchurch',
+        title: 'Truck & Campervan Repairs Christchurch | Glory Panel & Paint',
+        description:
+			'Truck, trailer, campervan & motorhome repairs in Christchurch: panel beating, resprays & fibreglass. All insurance claims. 5.0★ from 330+ Google reviews.',
+    },
     insurance: {
         path: '/insurance/',
         focusKeyword: 'insurance car repairs Christchurch',
@@ -55,7 +62,7 @@ export const pageSeo: Record<string, PageSeo> = {
         focusKeyword: 'book car assessment Christchurch',
         title: 'Book Online | Vehicle Assessment | Glory Panel & Paint',
         description:
-			'Book your free vehicle assessment online. Pick a time, tell us about your vehicle and upload damage photos. Glory Panel & Paint, Hornby, Christchurch.',
+			'Book your free vehicle assessment online. Pick a time that suits you and tell us about your vehicle. Glory Panel & Paint, Hornby, Christchurch.',
     },
     'book-appointment': {
         path: '/book-appointment/',

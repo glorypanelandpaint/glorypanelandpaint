@@ -3,6 +3,10 @@ export type HomeService = {
 	description: string;
 	/** Raw SVG child markup (paths, rects, etc.) */
 	iconSvg: string;
+	/** Makes the whole card a link to this page. */
+	href?: string;
+	/** Show the card only on phones (≤768px) or only on tablets and desktops. Omit to show it everywhere. */
+	onlyOn?: 'phone' | 'tablet-desktop';
 };
 
 export const homeServices: HomeService[] = [
@@ -36,10 +40,11 @@ export const homeServices: HomeService[] = [
 			'<path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/>',
 	},
 	{
-		title: 'Fleet Services',
-		description: 'Fast, reliable repairs to keep your business vehicles moving.',
+		title: 'Trucks, Campervans & Fleet',
+		description: 'Repairs and resprays for trucks, trailers, campervans, motorhomes and fleets.',
 		iconSvg:
 			'<path d="M10 17h4V5H2v12h3"/><path d="M20 17h2v-3.34a4 4 0 0 0-1.17-2.83L19 9h-5v8h1"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/>',
+		href: '/trucks-campervans/',
 	},
 ];
 
@@ -115,11 +120,12 @@ export const serviceDetails: ServiceDetail[] = [
 		eyebrow: 'Fleet',
 		title: 'Fleet Services',
 		description:
-			'Fast, dependable repairs and refinishing to keep your business vehicles on the road and looking sharp. Flexible scheduling for fleet operators.',
-		image: '/images/glory-hero-forecourt-mobile.webp',
-		imageAlt: 'Jaguar F-Type outside the GLORY Panel & Paint workshop, Hornby Christchurch',
-		ctaLabel: 'Talk to us',
-		ctaHref: '/contact/',
+			'Fast, dependable repairs and refinishing to keep your business vehicles on the road and looking sharp. Flexible scheduling for fleet operators. We also repair and repaint trucks, trailers, campervans and motorhomes.',
+		// Pexels stock photo (see data/large-vehicles.ts), so the alt only describes the picture.
+		image: '/images/campervan-countryside.webp',
+		imageAlt: 'Campervan parked under a tree overlooking green countryside on a clear day',
+		ctaLabel: 'Truck & campervan repairs',
+		ctaHref: '/trucks-campervans/',
 	},
 ];
 

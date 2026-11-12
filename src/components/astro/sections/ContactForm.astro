@@ -1,7 +1,22 @@
 ---
 import ContactFormReact from '../../react/ContactForm';
 import { business } from '../../../data/business';
+import type { VehicleType } from '../../../data/quote-options';
 import '../../../pages/contact/form.scss';
+
+interface Props {
+  /** "large-vehicle" adds the truck & campervan questions. */
+  variant?: 'standard' | 'large-vehicle';
+  /** Vehicle type chosen in advance on a vehicle-specific page. */
+  defaultVehicleType?: VehicleType;
+}
+
+const { variant, defaultVehicleType } = Astro.props;
+// Only pass what is set, so the standard form renders exactly as before.
+const extraProps = {
+  ...(variant ? { variant } : {}),
+  ...(defaultVehicleType ? { defaultVehicleType } : {}),
+};
 ---
 
-<ContactFormReact client:load quotesEmail={business.quotesEmail} />
+<ContactFormReact client:load quotesEmail={business.quotesEmail} {...extraProps} />

@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
@@ -7,10 +7,21 @@ import {
 	type ContactFormValues,
 } from '../../lib/schemas/contact-form';
 import { submitContactForm, uploadContactFile } from '../../api/contact';
+import { trackEvent } from '../../lib/analytics';
+import {
+	insurers,
+	serviceGroups,
+	vehicleTypes,
+	type VehicleType,
+} from '../../data/quote-options';
 import { Button } from '@/components/ui/button';
 
 interface Props {
 	quotesEmail: string;
+	/** "large-vehicle" adds the truck & campervan questions. */
+	variant?: 'standard' | 'large-vehicle';
+	/** Vehicle type chosen in advance on a vehicle-specific page. */
+	defaultVehicleType?: VehicleType;
 }
 
 type PhotoUpload = {
@@ -30,6 +41,26 @@ const defaultValues: ContactFormValues = {
 	photos: [],
 };
 
+function getStartValues(
+	variant: Props['variant'],
+	defaultVehicleType?: VehicleType,
+): ContactFormValues {
+	if (variant !== 'large-vehicle') return defaultValues;
+	return {
+		...defaultValues,
+		largeVehicle: {
+			enquiringAs: 'individual',
+			companyName: '',
+			vehicleType: defaultVehicleType ?? '',
+			service: '',
+			// Defaults to Yes so nobody skips past the question.
+			insuranceClaim: 'yes',
+			insurer: '',
+			claimNumber: '',
+		},
+	};
+}
+
 function syncPhotoUrls(
 	uploads: PhotoUpload[],
 	setValue: ReturnType<typeof useForm<ContactFormValues>>['setValue'],
@@ -40,12 +71,18 @@ function syncPhotoUrls(
 	setValue('photos', urls, { shouldValidate: true });
 }
 
-export default function ContactForm({ quotesEmail }: Props) {
+export default function ContactForm({ quotesEmail, variant, defaultVehicleType }: Props) {
 	const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
 	const [successMessage, setSuccessMessage] = useState('');
 	const [uploads, setUploads] = useState<PhotoUpload[]>([]);
 	const [fileError, setFileError] = useState<string | null>(null);
 	const fileInputRef = useRef<HTMLInputElement>(null);
+
+	const isLargeVehicle = variant === 'large-vehicle';
+	const startValues = useMemo(
+		() => getStartValues(variant, defaultVehicleType),
+		[variant, defaultVehicleType],
+	);
 
 	const {
 		register,
@@ -54,11 +91,15 @@ export default function ContactForm({ quotesEmail }: Props) {
 		reset,
 		setError,
 		clearErrors,
+		watch,
 		formState: { errors, isSubmitting },
 	} = useForm<ContactFormValues>({
 		resolver: zodResolver(contactFormSchema),
-		defaultValues,
+		defaultValues: startValues,
 	});
+
+	const largeVehicle = watch('largeVehicle');
+	const largeVehicleErrors = errors.largeVehicle;
 
 	const startUpload = (file: File) => {
 		const id = crypto.randomUUID();
@@ -132,12 +173,20 @@ export default function ContactForm({ quotesEmail }: Props) {
 			const result = await submitContactForm(values);
 			setSuccessMessage(result.message);
 			setStatus('success');
-			reset(defaultValues);
+			reset(startValues);
 			setUploads([]);
 			if (fileInputRef.current) fileInputRef.current.value = '';
-			window.posthog?.capture("quote_request_submitted", {
+			const details = values.largeVehicle;
+			// No personal details: no names, contact details, rego, company or claim number.
+			trackEvent('quote_request_submitted', {
+				form_variant: details ? 'large_vehicle' : 'standard',
 				has_vehicle: !!values.vehicle.trim(),
 				photo_count: values.photos.length,
+				vehicle_type: details?.vehicleType,
+				service: details?.service,
+				enquiring_as: details?.enquiringAs,
+				insurance_claim: details?.insuranceClaim,
+				insurer: details?.insuranceClaim === 'yes' ? details.insurer : undefined,
 			});
 		} catch (err) {
 			setError('root', {
@@ -212,15 +261,176 @@ export default function ContactForm({ quotesEmail }: Props) {
 				</div>
 			</div>
 
+			{isLargeVehicle && (
+				<>
+					<fieldset className="field field-choice">
+						<legend>Enquiring as</legend>
+						<label>
+							<input
+								type="radio"
+								value="individual"
+								defaultChecked={startValues.largeVehicle?.enquiringAs === 'individual'}
+								{...register('largeVehicle.enquiringAs')}
+							/>
+							Individual
+						</label>
+						<label>
+							<input
+								type="radio"
+								value="company"
+								defaultChecked={startValues.largeVehicle?.enquiringAs === 'company'}
+								{...register('largeVehicle.enquiringAs')}
+							/>
+							Company
+						</label>
+					</fieldset>
+
+					{largeVehicle?.enquiringAs === 'company' && (
+						<div className="field">
+							<label htmlFor="contact-company">
+								Company name <span className="req" aria-hidden="true">*</span>
+							</label>
+							<input
+								id="contact-company"
+								type="text"
+								autoComplete="organization"
+								placeholder="ABC Transport Ltd"
+								aria-required="true"
+								aria-invalid={!!largeVehicleErrors?.companyName}
+								{...register('largeVehicle.companyName')}
+							/>
+							{largeVehicleErrors?.companyName && (
+								<div className="field-error">{largeVehicleErrors.companyName.message}</div>
+							)}
+						</div>
+					)}
+
+					<div className="field-row">
+						<div className="field">
+							<label htmlFor="contact-vehicle-type">Vehicle type</label>
+							<select
+								id="contact-vehicle-type"
+								className={largeVehicle?.vehicleType ? undefined : 'is-placeholder'}
+								defaultValue={startValues.largeVehicle?.vehicleType}
+								aria-invalid={!!largeVehicleErrors?.vehicleType}
+								{...register('largeVehicle.vehicleType')}
+							>
+								<option value="" disabled hidden>
+									Choose a vehicle type
+								</option>
+								{vehicleTypes.map((type) => (
+									<option key={type} value={type}>
+										{type}
+									</option>
+								))}
+							</select>
+							{largeVehicleErrors?.vehicleType && (
+								<div className="field-error">{largeVehicleErrors.vehicleType.message}</div>
+							)}
+						</div>
+
+						<div className="field">
+							<label htmlFor="contact-service">What do you need?</label>
+							<select
+								id="contact-service"
+								className={largeVehicle?.service ? undefined : 'is-placeholder'}
+								defaultValue={startValues.largeVehicle?.service}
+								aria-invalid={!!largeVehicleErrors?.service}
+								{...register('largeVehicle.service')}
+							>
+								<option value="" disabled hidden>
+									Choose a service
+								</option>
+								{serviceGroups.map((group) => (
+									<optgroup key={group.label} label={group.label}>
+										{group.options.map((option) => (
+											<option key={option} value={option}>
+												{option}
+											</option>
+										))}
+									</optgroup>
+								))}
+							</select>
+							{largeVehicleErrors?.service && (
+								<div className="field-error">{largeVehicleErrors.service.message}</div>
+							)}
+						</div>
+					</div>
+				</>
+			)}
+
 			<div className="field">
 				<label htmlFor="contact-vehicle">Vehicle (make / model / rego)</label>
 				<input
 					id="contact-vehicle"
 					type="text"
-					placeholder="Toyota Corolla, ABC123"
+					placeholder={isLargeVehicle ? 'Isuzu FRR, ABC123' : 'Toyota Corolla, ABC123'}
 					{...register('vehicle')}
 				/>
 			</div>
+
+			{isLargeVehicle && (
+				<>
+					<fieldset className="field field-choice">
+						<legend>Is this an insurance claim?</legend>
+						<label>
+							<input
+								type="radio"
+								value="yes"
+								defaultChecked={startValues.largeVehicle?.insuranceClaim === 'yes'}
+								{...register('largeVehicle.insuranceClaim')}
+							/>
+							Yes
+						</label>
+						<label>
+							<input
+								type="radio"
+								value="no"
+								defaultChecked={startValues.largeVehicle?.insuranceClaim === 'no'}
+								{...register('largeVehicle.insuranceClaim')}
+							/>
+							No
+						</label>
+					</fieldset>
+
+					{largeVehicle?.insuranceClaim === 'yes' && (
+						<div className="field-row">
+							<div className="field">
+								<label htmlFor="contact-insurer">Insurance company</label>
+								<select
+									id="contact-insurer"
+									className={largeVehicle.insurer ? undefined : 'is-placeholder'}
+									defaultValue={startValues.largeVehicle?.insurer}
+									aria-invalid={!!largeVehicleErrors?.insurer}
+									{...register('largeVehicle.insurer')}
+								>
+									<option value="" disabled hidden>
+										Choose your insurer
+									</option>
+									{insurers.map((insurer) => (
+										<option key={insurer} value={insurer}>
+											{insurer}
+										</option>
+									))}
+								</select>
+								{largeVehicleErrors?.insurer && (
+									<div className="field-error">{largeVehicleErrors.insurer.message}</div>
+								)}
+							</div>
+
+							<div className="field">
+								<label htmlFor="contact-claim-number">Claim number (if you have it)</label>
+								<input
+									id="contact-claim-number"
+									type="text"
+									placeholder="CLM1234567"
+									{...register('largeVehicle.claimNumber')}
+								/>
+							</div>
+						</div>
+					)}
+				</>
+			)}
 
 			<div className="field">
 				<label htmlFor="contact-message">How can we help?</label>

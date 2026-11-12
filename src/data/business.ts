@@ -54,6 +54,7 @@ export const business = {
 export const navigation = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services/" },
+  { label: "Trucks & Campervans", href: "/trucks-campervans/" },
   { label: "Insurance", href: "/insurance/" },
   { label: "About", href: "/about/" },
   { label: "Contact", href: "/contact/" },

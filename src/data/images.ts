@@ -16,6 +16,7 @@ export const images = {
   porsche911Yellow: img('glory-forecourt-porsche-911-yellow.webp'),
   porsche911Grey: img('glory-forecourt-porsche-911-grey.webp'),
   ferrariCalifornia: img('glory-forecourt-ferrari-california.webp'),
+  ferrariUrusWide: img('glory-forecourt-ferrari-urus-wide.webp'),
   assessment: img('assessment.jpg'),
 } as const;
 

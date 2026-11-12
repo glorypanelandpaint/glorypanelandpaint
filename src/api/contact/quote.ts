@@ -1,56 +1,39 @@
 import { api } from '../client';
 import type { ContactFormValues, LargeVehicleValues } from '../../lib/schemas/contact-form';
-import type { ContactQuotePayload, ContactQuoteResponse } from './types';
+import type { ContactQuotePayload, ContactQuoteResponse, LargeVehicleQuoteFields } from './types';
 
 /**
- * The quote backend only knows name, phone, email, vehicle, message and photos,
- * so the truck & campervan answers go at the top of the message.
+ * Truck & campervan answers go to the backend as their own fields; the quote email lists them
+ * under "Job Details". Answers that don't apply (company name for individuals, insurer when
+ * it isn't a claim) are left out.
  */
-function largeVehicleSummary(details: LargeVehicleValues): string {
-	const customer =
-		details.enquiringAs === 'company'
-			? `Company (${details.companyName.trim()})`
-			: 'Individual';
-	const claimNumber = details.claimNumber.trim();
-	const claim =
-		details.insuranceClaim === 'yes'
-			? ['Yes', details.insurer, claimNumber && `claim number ${claimNumber}`]
-				.filter(Boolean)
-				.join(', ')
-			: 'No';
+function largeVehicleFields(details: LargeVehicleValues): LargeVehicleQuoteFields {
+	const isCompany = details.enquiringAs === 'company';
+	const isClaim = details.insuranceClaim === 'yes';
 
-	return [
-		`Enquiring as: ${customer}`,
-		`Vehicle type: ${details.vehicleType}`,
-		`Service: ${details.service}`,
-		`Insurance claim: ${claim}`,
-	].join('\n');
+	return {
+		form: 'truck-campervan',
+		enquiringAs: isCompany ? 'Company' : 'Individual',
+		companyName: isCompany ? details.companyName.trim() : undefined,
+		vehicleType: details.vehicleType,
+		service: details.service,
+		insuranceClaim: isClaim ? 'Yes' : 'No',
+		insurer: isClaim ? details.insurer : undefined,
+		claimNumber: isClaim ? details.claimNumber.trim() || undefined : undefined,
+	};
 }
 
 function toQuotePayload(values: ContactFormValues): ContactQuotePayload {
-	const details = values.largeVehicle;
-	const vehicle = values.vehicle.trim();
-	const message = values.message.trim();
-
-	if (!details) {
-		return {
-			name: values.name.trim(),
-			phone: values.phone.trim(),
-			email: values.email.trim(),
-			vehicle: vehicle || undefined,
-			message,
-			photos: values.photos.length > 0 ? values.photos : undefined,
-		};
-	}
-
-	return {
+	const payload: ContactQuotePayload = {
 		name: values.name.trim(),
 		phone: values.phone.trim(),
 		email: values.email.trim(),
-		vehicle: [details.vehicleType, vehicle].filter(Boolean).join(' – '),
-		message: `${largeVehicleSummary(details)}\n\n${message}`,
+		vehicle: values.vehicle.trim() || undefined,
+		message: values.message.trim(),
 		photos: values.photos.length > 0 ? values.photos : undefined,
 	};
+
+	return values.largeVehicle ? { ...payload, ...largeVehicleFields(values.largeVehicle) } : payload;
 }
 
 export async function submitContactForm(

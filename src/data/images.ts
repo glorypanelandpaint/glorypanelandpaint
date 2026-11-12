@@ -14,7 +14,7 @@ export const images = {
   nissanGtr: img('glory-nissan-gtr.webp'),
   bentleyBlue: img('glory-bentley-blue.webp'),
   porscheMclaren: img('glory-porsche-mclaren.webp'),
-  porsche911: img('glory-porsche-911.webp'),
+  porsche911Yellow: img('glory-forecourt-porsche-911-yellow.webp'),
   ferrariCalifornia: img('glory-forecourt-ferrari-california.webp'),
   assessment: img('assessment.jpg'),
 } as const;
@@ -43,6 +43,6 @@ export const photoStripImages = [
   { src: images.porscheMclaren, alt: 'Porsche 911 and yellow McLaren at GLORY Panel & Paint, Christchurch' },
   { src: images.ferrari488, alt: 'Red Ferrari 488 at GLORY Panel & Paint, Christchurch' },
   { src: images.ferrariCalifornia, alt: 'Red Ferrari California outside GLORY Panel & Paint, Hornby' },
-  { src: images.porsche911, alt: 'Porsche 911 at GLORY Panel & Paint, Christchurch' },
+  { src: images.porsche911Yellow, alt: 'Yellow Porsche 911 outside GLORY Panel & Paint, Hornby Christchurch' },
   { src: images.lamborghiniGallardo, alt: 'White Lamborghini Gallardo at GLORY Panel & Paint, Christchurch' },
 ] as const;

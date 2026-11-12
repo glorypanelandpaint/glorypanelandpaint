@@ -12,7 +12,6 @@ export const images = {
   lamborghiniGallardo: img('glory-lamborghini-gallardo.webp'),
   mclarenMaserati: img('glory-mclaren-maserati.webp'),
   nissanGtr: img('glory-nissan-gtr.webp'),
-  bentleyBlue: img('glory-bentley-blue.webp'),
   porscheMclaren: img('glory-porsche-mclaren.webp'),
   porsche911Yellow: img('glory-forecourt-porsche-911-yellow.webp'),
   porsche911Grey: img('glory-forecourt-porsche-911-grey.webp'),
